@@ -1,0 +1,19 @@
+aws ec2 start-instances --instance-ids i-073ec010771175c9q
+
+status=0
+
+# Wait for the instance until the 2/2 checks are passed
+while [ $status -lt 2]
+do
+    status=`aws ec2 describe-instance-status --instance-ids  i-073ec010771175c9q --filters Name="instance-status.reachability,Values=passed" | grep  '"Status": "passed"' | wc -l`
+    # add sleep time 
+done
+
+#  Associate an Elastic IP if already have one allocated (skip if not reqd)
+#aws ec2 associate-address --instance-id i-xxxxxxxxxxx --public-ip elastic_ip
+
+#  Get the Public DNS, (If the instance has only PrivateIp, grep "PrivateIpAddress")
+public_dns=`aws ec2 describe-instances --instance-ids i-073ec010771175c9q | grep "PublicDnsName" | head -1 | awk -F: '{print $2}' | sed 's/\ "//g;s/",//g'`
+
+ssh -i teeeech.pem ubuntu@public_dns
+
