@@ -1,0 +1,21 @@
+CI should be enabled i.e. automatically trigger build/pipeline on any code commit
+Automated deployment to EKS cluster
+Non-outage deployment i.e. web app should be available during deployment
+Dashboards for deployment success / fail rate, timings are updated with each deployment automatically.
+
+
+
+
+
+
+As a DevOps Engineer I would like to automate deployment of my docker containers for web applications to AWS EKS using AWS code build for building application and code pipeline to orchestrate build and deployment. I want AWS cloudwatch dashboards to be used to show build / deployment metrics
+
+So that I can automated the build/deployment process. Deploy to production in non-outage mode. Get better insights on deployment metrics
+
+Current Scope
+
+Store source code on AWS code commit / github.
+Trigger automated build process upon code commit to source code.
+Build docker images and store them on ECR.
+Deploy the docker image to EKS cluster.
+Display deployment statistics in AWS cloudwath dashboards.
